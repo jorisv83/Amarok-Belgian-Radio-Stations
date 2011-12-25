@@ -26,8 +26,10 @@
 #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
 ##########################################################################*/
 
-Importer.loadQtBinding("qt.core");
-Importer.loadQtBinding("qt.gui");
+Importer.loadQtBinding( "qt.core" );
+Importer.loadQtBinding( "qt.xml" );
+Importer.loadQtBinding( "qt.network" );
+Importer.loadQtBinding( "qt.gui" ); //for QPixmap
 
 function Station( name, url, description )
 {
@@ -36,342 +38,416 @@ function Station( name, url, description )
     this.description = description;
 }
 
-
 categories = new Object;
+images = new Object;
 
-// categories["Caracol Radio"]=new Array (
-//     new Station("Caracol Radio en vivo 1", "http://strf03.host.mia.us.cadenaunionradio.com/cocarcol", "Caracol Radio Bogota Colombia"),
-//     new Station("Caracol Radio en vivo 2", "http://strf02.host.mia.us.cadenaunionradio.com/cocarcol", "Caracol Radio Bogota Colombia")
-// );
+function AddNewStation( index, stationArray, image )
+{
+    categories[index]=stationArray;
+    images[index]=image;
+}
 
-categories["Studio Brussel"]=new Array (
-    new Station("Studio Brussel", "http://mp3.streampower.be/stubru-high.mp3", "Studio Brussel")
-//    new Station("Studio Brussel Rock It!", "http://mp3.streampower.be/stubru_rock_it-high.mp3", "Studio Brussel Rock It!")
-);
+//Add the stations to the lists created above.
 
-categories["Radio 1"]=new Array (
-    new Station("Radio 1", "http://mp3.streampower.be/radio1-high.mp3", "Radio 1"),
-    new Station("Nieuws Plus", "http://download.streampower.be/vrt/radio1/11_11niws-snip_hi.mp3", "Nieuws Plus")
-//    new Station("Radio 1 Classics", "http://mp3.streampower.be/radio1_classics-high.mp3", "Radio 1 Classics")
-);
+AddNewStation( "Studio Brussel", 
+		new Array (
+		  new Station("Studio Brussel", "http://mp3.streampower.be/stubru-high.mp3", "Top 40 / Rock / Alternative")
+		  //new Station("Studio Brussel Rock It!", "http://mp3.streampower.be/stubru_rock_it-high.mp3", "Rock / Alternative")
+		), 
+	       "images/zender_stubru.gif");
 
-categories["Klara"]=new Array (
-    new Station("Klara", "http://mp3.streampower.be/klara-high.mp3", "Klara"),
-    new Station("Klara Continuoso", "http://mp3.streampower.be/klaracontinuo-high.mp3", "Klara Continuoso")
-//    new Station("Klara Jazz", "http://mp3.streampower.be/klara_jazz-high.mp3", "Klara Jazz")
-);
+AddNewStation( "Radio 1", 
+		new Array (
+		  new Station("Radio 1", "http://mp3.streampower.be/radio1-high.mp3", "Music / Information"),
+		  new Station("Nieuws Plus", "http://download.streampower.be/vrt/radio1/11_11niws-snip_hi.mp3", "Music / Information")
+		  //new Station("Radio 1 Classics", "http://mp3.streampower.be/radio1_classics-high.mp3", "Music / Information")
+		), 
+	       "images/zender_radio1.gif");
 
-categories["Radio 2"]=new Array (
-    new Station("Radio 2 Antwerpen", "http://mp3.streampower.be/ra2ant-high.mp3", "Radio 2 Antwerpen"),
-    new Station("Radio 2 Vlaams-Brabant", "http://mp3.streampower.be/ra2vlb-high.mp3", "Radio 2 Vlaams-Brabant"),
-    new Station("Radio 2 Limburg", "http://mp3.streampower.be/ra2lim-high.mp3", "Radio 2 Limburg"),
-    new Station("Radio 2 Oost-Vlaanderen", "http://mp3.streampower.be/ra2ovl-high.mp3", "Radio 2 Oost-Vlaanderen"),
-    new Station("Radio 2 West-Vlaanderen", "http://mp3.streampower.be/ra2wvl-high.mp3", "Radio 2 West-Vlaanderen")
-//    new Station("Radio 2 Top Collectie", "http://mp3.streampower.be/radio2_de_topcollectie_xl-high.mp3", "Radio 2 Top Collectie")
-);
+AddNewStation( "Klara", 
+		new Array (
+		  new Station("Klara", "http://mp3.streampower.be/klara-high.mp3", "Classical"),
+		  new Station("Klara Continuoso", "http://mp3.streampower.be/klaracontinuo-high.mp3", "Classical")
+		  //new Station("Klara Jazz", "http://mp3.streampower.be/klara_jazz-high.mp3", "Jazz")
+		), 
+	       "images/zender_klara.gif");
 
-categories["MNM"]=new Array (
-    new Station("MNM", "http://mp3.streampower.be/mnm-high.mp3", "MNM"),
-    new Station("MNM Hits", "http://mp3.streampower.be/mnm_hits-high.mp3", "MNM Hits")
-);
+AddNewStation( "Radio 2", 
+		new Array (
+		  new Station("Radio 2 Antwerpen", "http://mp3.streampower.be/ra2ant-high.mp3", "Music / Information / Regional service"),
+		  new Station("Radio 2 Vlaams-Brabant", "http://mp3.streampower.be/ra2vlb-high.mp3", "Music / Information / Regional service"),
+		  new Station("Radio 2 Limburg", "http://mp3.streampower.be/ra2lim-high.mp3", "Music / Information / Regional service"),
+		  new Station("Radio 2 Oost-Vlaanderen", "http://mp3.streampower.be/ra2ovl-high.mp3", "Music / Information / Regional service"),
+		  new Station("Radio 2 West-Vlaanderen", "http://mp3.streampower.be/ra2wvl-high.mp3", "Music / Information / Regional service")
+		  //new Station("Radio 2 Top Collectie", "http://mp3.streampower.be/radio2_de_topcollectie_xl-high.mp3", "Music / Information / Regional service")
+		), 
+	       "images/zender_radio2.gif");
 
-categories["Radio Vlaanderen"]=new Array (
-    new Station("Radio Vlaanderen", "http://mp3.streampower.be/rv-high.mp3", "Radio Vlaanderen"),
-    new Station("Radio Vlaanderen Info", "http://mp3.streampower.be/rvi-high.mp3", "Radio Vlaanderen Info")
-);
+AddNewStation( "MNM", 
+		new Array (
+		  new Station("MNM", "http://mp3.streampower.be/mnm-high.mp3", "Pop / Top 40"),
+		  new Station("MNM Hits", "http://mp3.streampower.be/mnm_hits-high.mp3", "Pop / Top 40")
+		), 
+	       "images/zender_mnm.gif");
 
-categories["Sporza"]=new Array (
-    new Station("Sporza", "http://mp3.streampower.be/sporza-high.mp3","Sporza")
-);
+AddNewStation( "Radio Vlaanderen", 
+		new Array (
+		  new Station("Radio Vlaanderen", "http://mp3.streampower.be/rv-high.mp3", "International service"),
+		  new Station("Radio Vlaanderen Info", "http://mp3.streampower.be/rvi-high.mp3", "International service")
+		), 
+	       "images/zender_rvi.gif");
 
-categories["Ketnet"]=new Array (
-    new Station("Ketnet", "http://mp3.streampower.be/ketnetradio-high.mp3","Ketnet")
-);
+AddNewStation( "Sporza", 
+		new Array (
+		  new Station("Sporza", "http://mp3.streampower.be/sporza-high.mp3","Sports / Music")
+		), 
+	       "images/zender_sporza.gif");
 
-categories["Crooze fm"]=new Array (
-    new Station("Crooze fm", "http://86.39.158.40:8000","Crooze fm")
-);
+AddNewStation( "Ketnet", 
+		new Array (
+		  new Station("Ketnet", "http://mp3.streampower.be/ketnetradio-high.mp3","Youth programmes")
+		), 
+	       "images/zender_ketnet.gif");
 
-categories["Exqi fm"]=new Array (
-    new Station("Exqi fm", "http://streams.lazernet.be:3660","Exqi fm")
-);
+AddNewStation( "Crooze fm", 
+		new Array (
+		  new Station("Crooze fm", "http://193.227.114.74:9000","Jazz / Easy Listening")
+		), 
+	       "images/zender_croozefm.gif");
 
-categories["fm Goud"]=new Array (
-    new Station("fm Goud", "http://stream16.fluoline.net:8008","fm Goud")
-);
+//"Exqi" is now "Radio Maria"
+/*AddNewStation( "Exqi fm", 
+		new Array (
+		  new Station("Exqi fm", "http://streams.lazernet.be:3660","Pop rock hits")
+		), 
+	       "images/zender_exqi.gif");*/
 
-categories["Hit fm"]=new Array (
-    new Station("Hit fm", "http://94.23.48.124:8000","Hit fm")
-);
+AddNewStation( "Radio Maria", 
+		new Array (
+		  new Station("Radio Maria", "http://stream.radiomaria.be:8000/RadioMaria-96","Catholic")
+		), 
+	       "images/zender_radiomaria.gif");
 
-categories["Humorzender"]=new Array (
-    new Station("Humorzender", "http://listen.radionomy.com/humorzender","Humorzender")
-);
+AddNewStation( "fm Goud", 
+		new Array (
+		  new Station("fm Goud", "http://stream16.fluoline.net:8008","Pop / Top 40")
+		), 
+	       "images/zender_fmgoud.gif");
 
-categories["Joe fm"]=new Array (
-    new Station("Joe fm", "mms://streaming.4fm.be/4fm_hi","Joe fm")
-);
+AddNewStation( "Hit fm", 
+		new Array (
+		  new Station("Hit fm", "http://94.23.48.124:8000","Top 40")
+		), 
+	       "images/zender_hitfm.gif");
 
-categories["Qmusic"]=new Array (
-    new Station("Qmusic", "mms://streaming.q-music.be/QBE_HI","Qmusic")
-);
+AddNewStation( "Humorzender", 
+		new Array (
+		  new Station("Humorzender", "http://listen.radionomy.com/humorzender","Comedy")
+		), 
+	       "images/zender_humorzender.gif");
 
-categories["Radio Contact"]=new Array (
-    new Station("Radio Contact", "http://icy.rtl.nl/contactfr.m3u","Radio Contact")
-);
+AddNewStation( "Joe fm", 
+		new Array (
+		  new Station("Joe fm", "http://194.0.174.13/4FM_MP3_HI.m3u","Pop / Top 40")
+		), 
+	       "images/zender_joefm.gif");
 
-categories["Nostalgie"]=new Array (
-    new Station("Nostalgie", "http://stream01.level27.be:80","Nostalgie")
-);
+AddNewStation( "Q-music", 
+		new Array (
+		  new Station("Q-music", "http://194.0.174.13/QBE_MP3_VERYHI.m3u","Pop / Top 40")
+		), 
+	       "images/zender_qmusic.gif");
 
-categories["RGR fm"]=new Array (
-    new Station("RGR fm", "http://shoutcast01.edpnet.net:10210","RGR fm") //other possible url: http://streams.lazernet.be:2620
-);
+//Stream URL does not exist anymore
+/*AddNewStation( "Radio Contact", 
+		new Array (
+		  new Station("Radio Contact", "http://icy.rtl.nl/contactfr.m3u","Radio Contact"),
+		  new Station("Radio Contact R&B", "http://icy.rtl.nl/contactrnb.m3u","Radio Contact R&B")
+		), 
+	       "images/zender_radiocontact.gif");*/
 
-categories["ROL Radio"]=new Array (
-    new Station("ROL Radio", "http://listen.radionomy.com/rolradio","ROL Radio")
-);
+AddNewStation( "Nostalgie", 
+		new Array (
+		  new Station("Nostalgie", "http://stream01.level27.be:80","Oldies")
+		), 
+	       "images/zender_nostalgie.gif");
 
-categories["Schlagerhits"]=new Array (
-    new Station("Schlagerhits", "http://listen.radionomy.com/schlagerhits.m3u","Schlagerhits")
-);
+AddNewStation( "RGR fm", 
+		new Array (
+		  new Station("RGR fm", "http://shoutcast01.edpnet.net:10210","Dance") //other possible url: http://streams.lazernet.be:2620
+		), 
+	       "images/zender_rgr.gif");
 
-categories["TOP Radio"]=new Array (
-    new Station("TOP Radio", "http://shoutcast01.edpnet.net:10090","TOP Radio") //other url: http://ns24907.ovh.net:8000
-);
+AddNewStation( "ROL Radio", 
+		new Array (
+		  new Station("ROL Radio", "http://listen.radionomy.com/rolradio","Oldies")
+		), 
+	       "images/zender_rolradio.gif");
 
-categories["C-dance"]=new Array (
-    new Station("C-dance", "http://streamserver.c-dance.com:8320","C-dance")
-);
+AddNewStation( "Schlagerhits", 
+		new Array (
+		  new Station("Schlagerhits", "http://listen.radionomy.com/schlagerhits.m3u","Schlager / Oldies")
+		), 
+	       "images/zender_schlagerhits.gif");
 
-categories["Slow radio"]=new Array (
-    new Station("Slow radio", "http://91.121.91.73:8090","Slow radio") //other possible urls: http://77.37.13.122 ; http://94.23.183.209 ; http://stream16.fluoline.net
-);
+AddNewStation( "TOP Radio", 
+		new Array (
+		  new Station("TOP Radio Gent", "http://ns24907.ovh.net:8000","Dance"),
+		  new Station("TOP Radio Aalter", "http://shoutcast01.edpnet.net:10090","Dance")
+		), 
+	       "images/zender_topradio.gif");
 
-categories["City-Music"]=new Array (
-    new Station("City-Music", "http://shoutcast01.edpnet.net:10150","City-Music")
-);
+AddNewStation( "C-dance", 
+		new Array (
+		  new Station("C-dance", "http://streamserver.c-dance.com:8320","Dance")
+		), 
+	       "images/zender_cdance.gif");
 
-categories["Rootsradio"]=new Array (
-    new Station("Rootsradio", "http://army.wavestreamer.com:4947","Rootsradio")
-);
+AddNewStation( "Slow radio", 
+		new Array (
+		  new Station("Slow radio", "http://stream1.slowradio.com","Slow")
+		), 
+	       "images/zender_slowradio.gif");
 
-categories["Stadsradio M"]=new Array (
-    new Station("Stadsradio M", "http://listen.radionomy.com/stadsradio-m","Stadsradio M")
-);
+AddNewStation( "City-Music", 
+		new Array (
+		  new Station("City-Music", "http://shoutcast01.edpnet.net:10150","Pop")
+		), 
+	       "images/zender_citymusic.gif");
 
-categories["Urgent FM"]=new Array (
-    new Station("Urgent FM", "http://urgent.stream.flumotion.com/urgent/high.mp3.m3u","Urgent FM")
-);
+AddNewStation( "Rootsradio", 
+		new Array (
+		  new Station("Rootsradio", "http://army.wavestreamer.com:4947","Jazz / Folk / Blues")
+		), 
+	       "images/zender_rootsradio.gif");
 
-categories["Fun Radio"]=new Array (
-    new Station("Fun Radio", "http://broadcast.infomaniak.net/funradiobe-high.mp3.m3u","Fun Radio")
-);
+AddNewStation( "Stadsradio M", 
+		new Array (
+		  new Station("Stadsradio M", "http://listen.radionomy.com/stadsradio-m","Pop / Top 40")
+		), 
+	       "images/zender_stadsradiom.gif");
 
-categories["Rock fm"]=new Array (
-    new Station("Rock fm", "http://streams.movemedia.eu:8440","Rock fm")
-);
+AddNewStation( "Urgent Radio", 
+		new Array (
+		  new Station("Urgent Radio", "http://urgent.stream.flumotion.com/urgent/high.mp3.m3u","Student radio") //other url: http://195.10.10.223:80/urgent/high.mp3?GKID=0acd78622f1811e1857e00163ea2c743&fspref=aHR0cDovL3d3dy5saXN0ZW5saXZlLmV1L2JlbGdpdW0uaHRtbA%3D%3D
+		), 
+	       "images/zender_urgentfm.gif");
 
-categories["2bfm"]=new Array (
-    new Station("2bfm", "http://listen.radionomy.com/2bfm.m3u","2bfm")
-);
+AddNewStation( "Fun Radio", 
+		new Array (
+		  new Station("Fun Radio", "http://broadcast.infomaniak.net/funradiobe-high.mp3.m3u","Top 40")
+		), 
+	       "images/zender_funradio.gif");
 
-categories["Laser Radio"]=new Array (
-    new Station("Laser Radio", "http://server-09.stream-server.nl:8040","Laser Radio") //other url: http://server-06.stream-server.nl:8040
-);
+AddNewStation( "Rock fm", 
+		new Array (
+		  new Station("Rock fm", "http://streams.movemedia.eu:8440","Rock")
+		), 
+	       "images/zender_rockfmonline.gif");
 
-categories["Jouwradio"]=new Array (
-    new Station("Jouwradio", "http://82.94.204.71","Jouwradio") //other possible url: http://82.94.204.95
-);
+AddNewStation( "2bfm", 
+		new Array (
+		  new Station("2bfm", "http://listen.radionomy.com/2bfm.m3u","Top 40")
+		), 
+	       "images/zender_2bfm.gif");
 
-categories["Komilfoo fm"]=new Array (
-    new Station("Komilfoo fm", "http://shoutcast01.edpnet.net:10130","Komilfoo fm")
-);
+AddNewStation( "Laser Radio", 
+		new Array (
+		  new Station("Laser Radio", "http://server-09.stream-server.nl:8040","Dance") //other url: http://server-06.stream-server.nl:8040
+		), 
+	       "images/zender_laserradio.gif");
+
+AddNewStation( "Jouw! Radio", 
+		new Array (
+		  new Station("Jouw! Radio", "http://82.94.204.71","Flemish music") //other possible url: http://82.94.204.95
+		), 
+	       "images/zender_jouwradio.gif");
+
+AddNewStation( "Komilfoo fm", 
+		new Array (
+		  new Station("Komilfoo fm", "http://shoutcast01.edpnet.net:10130","Pop/Local news")
+		), 
+	       "images/zender_komilfoo.gif");
 
 //This is also "o radio antwerpen" >> streams are the same.
-categories["FG DJ Radio"]=new Array (
-    new Station("FG DJ Radio (Antwerpen)", "http://87.98.215.40:80","FG DJ Radio (Antwerpen)"),
-    new Station("FG DJ Radio (Parijs)", "http://fg.impek.tv","FG DJ Radio (Parijs)")
-);
+AddNewStation( "FG DJ Radio", 
+		new Array (
+		  new Station("FG DJ Radio (Antwerpen)", "http://87.98.215.40:80","Dance"),
+		  new Station("FG DJ Radio (Parijs)", "http://fg.impek.tv","Dance")
+		), 
+	       "images/zender_fgdjradio.gif");
 
-categories["Radio Go4it"]=new Array (
-    new Station("Radio Go4it", "http://listen.radionomy.com/radiogo4it.m3u","Radio Go4it")
-);
+AddNewStation( "Radio Go4it", 
+		new Array (
+		  new Station("Radio Go4it", "http://listen.radionomy.com/radiogo4it.m3u","Pop / Top 40")
+		), 
+	       "images/zender_radiogo4it.gif");
 
-categories["Planet Rock"]=new Array (
-    new Station("Planet Rock", "http://stream16.fluoline.net:8000","Planet Rock")
-);
+AddNewStation( "Planet Rock", 
+		new Array (
+		  new Station("Planet Rock", "http://stream13.level27.be:8018","Rock")
+		), 
+	       "images/zender_planetrock.gif");
 
-categories["Nashville fm"]=new Array (
-    new Station("Nashville fm", "http://broadband.nashvillefm.net:5502","Nashville fm")
-);
+AddNewStation( "Nashville fm", 
+		new Array (
+		  new Station("Nashville fm", "http://server-14.stream-server.nl:8300","Country")
+		), 
+	       "images/zender_nashvillefm.gif");
 
-categories["City Gold"]=new Array (
-    new Station("City Gold", "http://stream.citygold.be:8004","City Gold")
-);
+//Stream is offline
+/*AddNewStation( "City Gold", 
+		new Array (
+		  new Station("City Gold", "http://stream.citygold.be:8004","Oldies")
+		), 
+	       "images/zender_citygold.gif");*/
 
-categories["Starlight Radio"]=new Array (
-    new Station("Starlight Radio", "http://server-06.stream-server.nl:8290","Starlight Radio")
-);
+AddNewStation( "Starlight Radio", 
+		new Array (
+		  new Station("Starlight Radio", "http://server-06.stream-server.nl:8290","Top 40")
+		), 
+	       "images/zender_starlightradio.gif");
 
-categories["Golden Flash"]=new Array (
-    new Station("Golden Flash", "http://streaming2.intronic.nl:80/goldenflash","Golden Flash") //other url: http://server-16.stream-server.nl:8920
-);
+AddNewStation( "Golden Flash", 
+		new Array (
+		  new Station("Golden Flash", "http://streaming2.intronic.nl:80/goldenflash","Oldies") //other url: http://server-16.stream-server.nl:8920
+		), 
+	       "images/zender_goldenflash.gif");
 
-categories["Zen fm"]=new Array (
-    new Station("Zen fm", "http://ns25042.ovh.net:8010","Zen fm")
-);
+AddNewStation( "Zen fm", 
+		new Array (
+		  new Station("Zen fm", "http://ns25042.ovh.net:8010","Chillout / Grooves")
+		), 
+	       "images/zender_zenfm.gif");
 
-categories["Pure fm"]=new Array (
-    new Station("Pure fm", "http://stream5.rtbf.be:8000/pure128xrtbf","Pure fm")
-);
+AddNewStation( "Pure fm", 
+		new Array (
+		  new Station("Pure fm", "http://stream5.rtbf.be:8000/pure128xrtbf","Top 40")
+		), 
+	       "images/zender_purefm.gif");
 
-categories["Trendy fm"]=new Array (
-    new Station("Trendy fm", "http://stream.trendyfm.be:8000","Trendy fm")
-);
+AddNewStation( "Trendy fm", 
+		new Array (
+		  new Station("Trendy fm", "http://stream.trendyfm.be:80","Top 40 / Dance")
+		), 
+	       "images/zender_trendyfm.gif");
 
-categories["Club fm"]=new Array (
-    new Station("Club fm", "http://stream.publimediasvr.be:8000/clubfm.mp3","Club fm")
-);
+AddNewStation( "Club fm", 
+		new Array (
+		  new Station("Club fm", "http://stream.publimediasvr.be:8000/clubfm.mp3","Pop")
+		), 
+	       "images/zender_clubfm.gif");
 
-categories["VivaCité"]=new Array (
-    new Station("VivaCité Mons", "http://www.static.rtbf.be/radio/vivacite/m3u/vivahnt_56k.m3u","VivaCité Mons"),
-    new Station("VivaCité Bruxelles", "http://www.static.rtbf.be/radio/vivacite/m3u/vivabxl_56k.m3u","VivaCité Bruxelles"),    
-    new Station("VivaCité Namur", "http://www.static.rtbf.be/radio/vivacite/m3u/vivanamur_56k.m3u","VivaCité Namur"),    
-    new Station("VivaCité Liège", "http://www.static.rtbf.be/radio/vivacite/m3u/vivaliege_56k.m3u","VivaCité Liège"),
-    new Station("VivaCité Charleroi", "http://www.static.rtbf.be/radio/vivacite/m3u/vivacha_56k.m3u","VivaCité Charleroi"),
-    new Station("VivaCité Verviers", "http://www.static.rtbf.be/radio/vivacite/m3u/vivaver_56k.m3u","VivaCité Verviers")
-);
+AddNewStation( "VivaCité", 
+		new Array (
+		  new Station("VivaCité Mons", "http://vivacitehainaut.ice.infomaniak.ch:80/vivacitehainaut.mp3","Music / Information / Regional service"),
+		  new Station("VivaCité Bruxelles", "http://vivacitebruxelles.ice.infomaniak.ch:80/vivacitebruxelles.mp3","Music / Information / Regional service"),    
+		  new Station("VivaCité Namur", "http://vivacitenamur-brabantwallo.ice.infomaniak.ch:80/vivacitenamur-brabantwallo.mp3","Music / Information / Regional service"),    
+		  new Station("VivaCité Liège", "http://vivaciteliege.ice.infomaniak.ch:80/vivaciteliege.mp3","Music / Information / Regional service"),
+		  new Station("VivaCité Charleroi", "http://vivacitecharleroi.ice.infomaniak.ch:80/vivacitecharleroi.mp3","Music / Information / Regional service")
+		  //new Station("VivaCité Verviers", "http://www.static.rtbf.be/radio/vivacite/m3u/vivaver_56k.m3u","Music / Information / Regional service")
+		), 
+	       "images/zender_vivacite.gif");
 
-categories["Musiq 3"]=new Array (
-    new Station("Musiq 3", "http://stream5.rtbf.be:8000/mus3128xrtbf","Musiq 3")
-);
+AddNewStation( "Musiq 3", 
+		new Array (
+		  new Station("Musiq 3", "http://stream5.rtbf.be:8000/mus3128xrtbf","Classical")
+		), 
+	       "images/zender_musiq3.gif");
 
-categories["Classic 21"]=new Array (
-    new Station("Classic 21", "http://stream5.rtbf.be:8000/2128xrtbf","Classic 21")
-);
+AddNewStation( "Classic 21", 
+		new Array (
+		  new Station("Classic 21", "http://stream5.rtbf.be:8000/2128xrtbf","Classic Hits"),
+		  //new Station("Classic 21 Les Classiques", "http://178.33.130.194:8000/listen.pls","Classic rock")
+		  new Station("Classic 21 60's", "http://178.33.130.197:8000", "60s")
+		  //new Station("Classic 21 80's", "http://178.33.130.196:8000/listen.plss", "80s")
+		), 
+	       "images/zender_classic21.gif");
 
-categories["Voodoo fm"]=new Array (
-    new Station("Voodoo fm", "http://193.227.114.74:8000","Voodoo fm")
-);
+//Does not exist anymore
+/*AddNewStation( "Voodoo fm", 
+		new Array (
+		  new Station("Voodoo fm", "http://193.227.114.74:8000","Voodoo fm")
+		), 
+	       "images/zender_voodoo.gif");*/
 
-categories["Memory Radio"]=new Array (
-    new Station("Memory Radio", "http://listen.radionomy.com/memory-radio","Memory Radio")
-);
+AddNewStation( "Memory Radio", 
+		new Array (
+		  new Station("Memory Radio", "http://listen.radionomy.com/memory-radio","Oldies")
+		), 
+	       "images/zender_memory.gif");
 
-categories["Radio Minerva"]=new Array (
-    new Station("Radio Minerva", "http://streams.movemedia.eu:8300","Radio Minerva")
-);
+AddNewStation( "Radio Minerva", 
+		new Array (
+		  new Station("Radio Minerva", "http://streams.movemedia.eu:8300","Oldies")
+		), 
+	       "images/zender_radiominerva.gif");
 
-categories["BRO info- & oldiesradio"]=new Array (
-    new Station("BRO info- & oldiesradio", "http://streams.movemedia.eu:8410","BRO info- & oldiesradio")
-);
+AddNewStation( "BRO info- & oldiesradio", 
+		new Array (
+		  new Station("BRO info- & oldiesradio", "http://streams.movemedia.eu:8410","Oldies")
+		), 
+	       "images/zender_bro.gif");
 
-categories["Antwerpen fm"]=new Array (
-    new Station("Antwerpen fm", "http://streams.lazernet.be:2710","Antwerpen fm")
-);
+AddNewStation( "Antwerpen fm", 
+		new Array (
+		  new Station("Antwerpen fm", "http://streams.lazernet.be:2710","Pop")
+		), 
+	       "images/zender_antwerpenfm.gif");
 
-categories["Zoe fm"]=new Array (
-    new Station("Zoe fm", "http://91.121.117.158:8500","Zoe fm")
-);
+AddNewStation( "Zoe fm", 
+		new Array (
+		  new Station("Zoe fm", "http://91.121.117.158:8500","80s / 90s / Todays Hits")
+		), 
+	       "images/zender_zoefm.gif");
 
-categories["Radio Stad"]=new Array (
-    new Station("Radio Stad", "http://stream.belgiantracks.be:8002","Radio Stad")
-);
+AddNewStation( "Radio Stad", 
+		new Array (
+		  new Station("Radio Stad", "http://stream.belgiantracks.be:8002","RnB")
+		), 
+	       "images/zender_radiostad.gif");
 
-categories["Radio Centraal"]=new Array (
-    new Station("Radio Stad", "http://streams.movemedia.eu:8530","Radio Centraal")
-);
+AddNewStation( "Radio Centraal", 
+		new Array (
+		  new Station("Radio Centraal", "http://streams.movemedia.eu:8530","Variety")
+		), 
+	       "images/zender_radiocentraal.gif");
 
-categories["Geel fm"]=new Array (
-    new Station("Geel fm", "http://geelfm.dyndns.org:8000/geelfm","Geel fm")
-);
+AddNewStation( "Geel fm", 
+		new Array (
+		  new Station("Geel fm", "http://geelfm.dyndns.org:8000/geelfm","Pop / Top 40")
+		), 
+	       "images/zender_geelfm.gif");
 
-categories["La Première"]=new Array (
-    new Station("La Première", "http://stream5.rtbf.be:8000/prem128xrtbf","La Première")
-);
+AddNewStation( "La Première", 
+		new Array (
+		  new Station("La Première", "http://stream5.rtbf.be:8000/prem128xrtbf","Music / Information")
+		), 
+	       "images/zender_lapremiere.gif");
 
-//TODO: "Multipop" has become "Brabo", but no stream yet...
+//End: Add the stations ...
 
-images = new Object;
-images["Studio Brussel"]="images/zender_stubru.gif";
-images["Radio 1"]="images/zender_radio1.gif";
-images["Klara"]="images/zender_klara.gif";
-images["Radio 2"]="images/zender_radio2.gif";
-images["MNM"]="images/zender_mnm.gif";
-images["Radio Vlaanderen"]="images/zender_rvi.gif";
-images["Sporza"]="images/zender_sporza.gif";
-images["Ketnet"]="images/zender_ketnet.gif";
-
-images["Crooze fm"]="images/zender_croozefm.gif";
-images["Exqi fm"]="images/zender_exqi.gif";
-images["fm Goud"]="images/zender_fmgoud.gif";
-images["Hit fm"]="images/zender_hitfm.gif";
-images["Humorzender"]="images/zender_humorzender.gif";
-images["Joe fm"]="images/zender_joefm.gif";
-images["Qmusic"]="images/zender_qmusic.gif";
-images["Radio Contact"]="images/zender_radiocontact.gif";
-images["Nostalgie"]="images/zender_nostalgie.gif";
-images["RGR fm"]="images/zender_rgr.gif";
-images["ROL Radio"]="images/zender_rolradio.gif";
-images["Schlagerhits"]="images/zender_schlagerhits.gif";
-images["TOP Radio"]="images/zender_topradio.gif";
-images["C-dance"]="images/zender_cdance.gif";
-images["Slow radio"]="images/zender_slowradio.gif";
-images["City-Music"]="images/zender_citymusic.gif";
-images["Rootsradio"]="images/zender_rootsradio.gif";
-images["Stadsradio M"]="images/zender_stadsradiom.gif";
-images["Urgent FM"]="images/zender_urgentfm.gif";
-images["Fun Radio"]="images/zender_funradio.gif";
-images["Rock fm"]="images/zender_rockfmonline.gif";
-images["2bfm"]="images/zender_2bfm.gif";
-images["Laser Radio"]="images/zender_laserradio.gif";
-images["Jouwradio"]="images/zender_jouwradio.gif";
-images["Komilfoo fm"]="images/zender_komilfoo.gif";
-images["FG DJ Radio"]="images/zender_fgdjradio.gif";
-images["Radio Go4it"]="images/zender_radiogo4it.gif";
-images["Planet Rock"]="images/zender_planetrock.gif";
-images["Nashville fm"]="images/zender_nashvillefm.gif";
-images["City Gold"]="images/zender_citygold.gif";
-images["Starlight Radio"]="images/zender_starlightradio.gif";
-images["Golden Flash"]="images/zender_goldenflash.gif";
-images["Zen fm"]="images/zender_zenfm.gif";
-images["Pure fm"]="images/zender_purefm.gif";
-images["Trendy fm"]="images/zender_trendyfm.gif";
-images["Club fm"]="images/zender_clubfm.gif";
-images["VivaCité"]="images/zender_vivacite.gif";
-images["Musiq 3"]="images/zender_musiq3.gif";
-images["Classic 21"]="images/zender_classic21.gif";
-images["Voodoo fm"]="images/zender_voodoo.gif";
-images["Memory Radio"]="images/zender_memory.gif";
-images["Radio Minerva"]="images/zender_radiominerva.gif";
-images["BRO info- & oldiesradio"]="images/zender_bro.gif";
-images["Antwerpen fm"]="images/zender_antwerpenfm.gif";
-images["Zoe fm"]="images/zender_zoefm.gif";
-images["Radio Stad"]="images/zender_radiostad.gif";
-images["Radio Centraal"]="images/zender_radiocentraal.gif";
-images["Geel fm"]="images/zender_geelfm.gif";
-images["La Première"]="images/zender_lapremiere.gif";
-
-function RadioVRT()
+function BelgianRadio()
 {
     ScriptableServiceScript.call( this, "Belgian radio", 2, "Belgian internet radio stations", "Belgian internet radio stations", false );
-    Amarok.debug( "ok." );
+    Amarok.debug( "BelgianRadio: OK" );
 }
 
 function onConfigure()
 {
-    Amarok.alert( "No Configuration Options." );
+    Amarok.alert( "No configuration options." );
 }
 
 function onPopulating( level, callbackData, filter )
 {
     if ( level == 1 ) 
     {
+	Amarok.debug( "BelgianRadio: Add station stream album ..." );
+	
         for( att in categories )
         {
             var cover = Amarok.Info.scriptPath() + "/" + images[att];
-            Amarok.debug ("att: " + att + ", " + categories[att].name);
+            Amarok.debug ("BelgianRadio: att: " + att + ", " + categories[att].name);
       
             item = Amarok.StreamItem;
 	    item.level = 1;
@@ -381,15 +457,12 @@ function onPopulating( level, callbackData, filter )
 	    item.infoHtml = "";
             item.coverUrl = cover;
 	    script.insertItem( item );
-
         }
         script.donePopulating();
-
     }
     else if ( level == 0 ) 
     {
-        Amarok.debug( " Recopilando emisoras..." );
-	//add the station streams as leaf nodes
+        Amarok.debug( "BelgianRadio: Add station stream ..." );
 
         var stationArray = categories[callbackData];
 
@@ -405,6 +478,7 @@ function onPopulating( level, callbackData, filter )
 		item.infoHtml = stationArray[i].description;
                 item.artist = "Radiostream";
                 item.coverUrl = cover;
+		item.genre = stationArray[i].description;
 		script.insertItem( item );
 	}
 	script.donePopulating();
@@ -413,12 +487,14 @@ function onPopulating( level, callbackData, filter )
 
 function onCustomize() {
     var currentDir = Amarok.Info.scriptPath() + "/";
-    var iconPixmap = new QPixmap(currentDir+"icon.png");
-    script.setIcon(iconPixmap);
+    var iconPixmap = new QPixmap(currentDir + "icon.png");
+    script.setIcon( iconPixmap );
+    var emblemPixmap = new QPixmap( currentDir + "icon.png" );
+    script.setEmblem( emblemPixmap );
 }
 
-Amarok.configured.connect( onConfigure );
+//Amarok.configured.connect( onConfigure );
 
-script = new RadioVRT();
+script = new BelgianRadio();
 script.populate.connect( onPopulating );
 script.customize.connect( onCustomize );
