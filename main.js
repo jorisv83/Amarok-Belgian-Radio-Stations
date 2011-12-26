@@ -38,9 +38,11 @@ function Station( name, url, description )
     this.description = description;
 }
 
-categories = new Object;
-images = new Object;
-
+var categories 	= new Object;
+var images 	= new Object;
+//var albumcount = 0;
+//var streamcount = 0;
+    
 function AddNewStation( index, stationArray, image )
 {
     categories[index]=stationArray;
@@ -429,7 +431,7 @@ AddNewStation( "La Première",
 
 function BelgianRadio()
 {
-    ScriptableServiceScript.call( this, "Belgian radio", 2, "Belgian internet radio stations", "Belgian internet radio stations", false );
+    ScriptableServiceScript.call( this, "Belgian radio", 2, "Belgian internet radio stations", "Belgian internet radio stations", true );
     Amarok.debug( "BelgianRadio: OK" );
 }
 
@@ -440,14 +442,40 @@ function onConfigure()
 
 function onPopulating( level, callbackData, filter )
 {
+    //For some reason Amarok appends a "%20", remove it
+    //filter = filter.toLowerCase().replace(/%20$/,"").replace("%20"," ");
+    
+    //Make filter string lowercase and unescape all urlencoded "tags" ( and trim the result )    
+    filter = filter.toLowerCase().trim();
+    filter = unescape(filter).trim();
+    
+    Amarok.debug( "BelgianRadio: filter = " + filter );
+    //Amarok.Window.Statusbar.shortMessage("Belgian radio is loading ...");    
+    
     if ( level == 1 ) 
     {
 	Amarok.debug( "BelgianRadio: Add station stream album ..." );
 	
         for( att in categories )
         {
+	    if(filter.length > 0)
+	    {
+		var hasItems = false;
+		var stationArray = categories[att];
+		for ( j = 0; j < stationArray.length; j++ )
+		{
+		    if(stationArray[j].name.toLowerCase().indexOf(filter) != -1)
+		    {
+			hasItems = true;
+			break;
+		    }
+		}
+		
+		if(!hasItems) continue;
+	    }
+			
             var cover = Amarok.Info.scriptPath() + "/" + images[att];
-            Amarok.debug ("BelgianRadio: att: " + att + ", " + categories[att].name);
+            Amarok.debug ("BelgianRadio: att = " + att + ", " + categories[att].name);
       
             item = Amarok.StreamItem;
 	    item.level = 1;
@@ -457,6 +485,7 @@ function onPopulating( level, callbackData, filter )
 	    item.infoHtml = "";
             item.coverUrl = cover;
 	    script.insertItem( item );
+	    albumcount++;
         }
         script.donePopulating();
     }
@@ -468,6 +497,12 @@ function onPopulating( level, callbackData, filter )
 
 	for ( i = 0; i < stationArray.length; i++ )
 	{
+		/*if(filter.length > 0)
+		{
+		    var stationname = stationArray[i].name;
+		    if(stationname.toLowerCase().indexOf(filter) == -1) continue;
+		}*/
+		
                 var cover = Amarok.Info.scriptPath() + "/" + images[callbackData];
 		item = Amarok.StreamItem;
 		item.level = 0;
@@ -480,7 +515,14 @@ function onPopulating( level, callbackData, filter )
                 item.coverUrl = cover;
 		item.genre = stationArray[i].description;
 		script.insertItem( item );
+		streamcount++;
 	}
+	
+	/*if ( stationArray[0].name = "La Première" )
+	{
+	    Amarok.Window.Statusbar.shortMessage("Loaded " + streamcount + " streams in " + albumcount + " albums.");
+	}*/
+	
 	script.donePopulating();
     }
 }
