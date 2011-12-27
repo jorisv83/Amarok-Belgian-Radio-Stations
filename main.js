@@ -485,7 +485,7 @@ function onPopulating( level, callbackData, filter )
 	    item.infoHtml = "";
             item.coverUrl = cover;
 	    script.insertItem( item );
-	    albumcount++;
+	    //albumcount++;
         }
         script.donePopulating();
     }
@@ -515,7 +515,7 @@ function onPopulating( level, callbackData, filter )
                 item.coverUrl = cover;
 		item.genre = stationArray[i].description;
 		script.insertItem( item );
-		streamcount++;
+		//streamcount++;
 	}
 	
 	/*if ( stationArray[0].name = "La Première" )
