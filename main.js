@@ -156,9 +156,15 @@ AddNewStation( "Joe fm",
 
 AddNewStation( "Q-music", 
 		new Array (
-		  new Station("Q-music", "http://194.0.174.13/QBE_MP3_VERYHI.m3u","Pop / Top 40")
+		  new Station("Q-music", "http://mp3streaming.q-music.be/QBE_MP3_HI.m3u","Pop / Top 40")
 		), 
 	       "images/zender_qmusic.gif");
+	       /*
+	       		(WMA 96 kbps) http://streaming.q-music.be/QBE_HI
+			(WMA 32 kbps mono) http://streaming.q-music.be/QBE_LO
+			(MP3 96 kbps) http://mp3streaming.q-music.be/QBE_MP3_HI.m3u
+			(MP3 32 kbps mono) http://mp3streaming.q-music.be/QBE_MP3_LO.m3u
+	       */
 
 //Stream URL does not exist anymore
 /*AddNewStation( "Radio Contact", 
