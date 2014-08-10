@@ -54,7 +54,6 @@ function AddNewStation( index, stationArray, image )
 AddNewStation( "Studio Brussel", 
 		new Array (
 		  new Station("Studio Brussel", "http://mp3.streampower.be/stubru-high.mp3", "Top 40 / Rock / Alternative")
-		  //new Station("Studio Brussel Rock It!", "http://mp3.streampower.be/stubru_rock_it-high.mp3", "Rock / Alternative")
 		), 
 	       "images/zender_stubru.gif");
 
@@ -62,7 +61,6 @@ AddNewStation( "Radio 1",
 		new Array (
 		  new Station("Radio 1", "http://mp3.streampower.be/radio1-high.mp3", "Music / Information"),
 		  new Station("Nieuws Plus", "http://download.streampower.be/vrt/radio1/11_11niws-snip_hi.mp3", "Music / Information")
-		  //new Station("Radio 1 Classics", "http://mp3.streampower.be/radio1_classics-high.mp3", "Music / Information")
 		), 
 	       "images/zender_radio1.gif");
 
@@ -70,7 +68,6 @@ AddNewStation( "Klara",
 		new Array (
 		  new Station("Klara", "http://mp3.streampower.be/klara-high.mp3", "Classical"),
 		  new Station("Klara Continuoso", "http://mp3.streampower.be/klaracontinuo-high.mp3", "Classical")
-		  //new Station("Klara Jazz", "http://mp3.streampower.be/klara_jazz-high.mp3", "Jazz")
 		), 
 	       "images/zender_klara.gif");
 
@@ -81,7 +78,6 @@ AddNewStation( "Radio 2",
 		  new Station("Radio 2 Limburg", "http://mp3.streampower.be/ra2lim-high.mp3", "Music / Information / Regional service"),
 		  new Station("Radio 2 Oost-Vlaanderen", "http://mp3.streampower.be/ra2ovl-high.mp3", "Music / Information / Regional service"),
 		  new Station("Radio 2 West-Vlaanderen", "http://mp3.streampower.be/ra2wvl-high.mp3", "Music / Information / Regional service")
-		  //new Station("Radio 2 Top Collectie", "http://mp3.streampower.be/radio2_de_topcollectie_xl-high.mp3", "Music / Information / Regional service")
 		), 
 	       "images/zender_radio2.gif");
 
@@ -113,16 +109,10 @@ AddNewStation( "Ketnet",
 
 AddNewStation( "Crooze fm", 
 		new Array (
-		  new Station("Crooze fm", "http://193.227.114.74:9000","Jazz / Easy Listening")
+		  new Station("Crooze fm", "http://77.92.64.44:8045/stream","Jazz / Easy Listening"),
+		  new Station("Crooze fm (alternate stream)", "http://77.92.64.44:8129/stream","Jazz / Easy Listening")
 		), 
 	       "images/zender_croozefm.gif");
-
-//"Exqi" is now "Radio Maria"
-/*AddNewStation( "Exqi fm", 
-		new Array (
-		  new Station("Exqi fm", "http://streams.lazernet.be:3660","Pop rock hits")
-		), 
-	       "images/zender_exqi.gif");*/
 
 AddNewStation( "Radio Maria", 
 		new Array (
@@ -132,7 +122,7 @@ AddNewStation( "Radio Maria",
 
 AddNewStation( "fm Goud", 
 		new Array (
-		  new Station("fm Goud", "http://stream16.fluoline.net:8008","Pop / Top 40")
+		  new Station("fm Goud", "http://stream01.level27.be:8008","Pop / Top 40")
 		), 
 	       "images/zender_fmgoud.gif");
 
@@ -150,39 +140,34 @@ AddNewStation( "Humorzender",
 
 AddNewStation( "Joe fm", 
 		new Array (
-		  new Station("Joe fm", "http://194.0.174.13/4FM_MP3_HI.m3u","Pop / Top 40")
+		  new Station("Joe fm", "http://vip2.str.reasonnet.com/JoeFM.mp3.96","Pop / Top 40"),
+		  new Station("Joe fm (mms)", "mms://cdn.streaming.joefm.be/vmmalive-live/joefm_high","Pop / Top 40")
 		), 
 	       "images/zender_joefm.gif");
 
 AddNewStation( "Q-music", 
 		new Array (
-		  new Station("Q-music", "http://mp3streaming.q-music.be/QBE_MP3_HI.m3u","Pop / Top 40")
+		  new Station("Q-music", "http://vip2.str.reasonnet.com:80/qmusic.be.mp3.96","Pop / Top 40")
 		), 
 	       "images/zender_qmusic.gif");
-	       /*
-	       		(WMA 96 kbps) http://streaming.q-music.be/QBE_HI
-			(WMA 32 kbps mono) http://streaming.q-music.be/QBE_LO
-			(MP3 96 kbps) http://mp3streaming.q-music.be/QBE_MP3_HI.m3u
-			(MP3 32 kbps mono) http://mp3streaming.q-music.be/QBE_MP3_LO.m3u
-	       */
 
-//Stream URL does not exist anymore
-/*AddNewStation( "Radio Contact", 
+AddNewStation( "Radio Contact", 
 		new Array (
-		  new Station("Radio Contact", "http://icy.rtl.nl/contactfr.m3u","Radio Contact"),
-		  new Station("Radio Contact R&B", "http://icy.rtl.nl/contactrnb.m3u","Radio Contact R&B")
+		  new Station("Radio Contact", "http://audiostream.rtl.be/contactfr192","Radio Contact"),
+		  new Station("Radio Contact R&B", "http://audiostream.rtl.be/contactrnb","Radio Contact R&B")
 		), 
-	       "images/zender_radiocontact.gif");*/
+	       "images/zender_radiocontact.gif");
 
 AddNewStation( "Nostalgie", 
 		new Array (
-		  new Station("Nostalgie", "http://stream01.level27.be:80","Oldies")
+		  new Station("Nostalgie", "http://ice32.infomaniak.ch:8000/nostalgiewhatafeeling-128.mp3","Oldies")
 		), 
 	       "images/zender_nostalgie.gif");
 
 AddNewStation( "RGR fm", 
 		new Array (
-		  new Station("RGR fm", "http://shoutcast01.edpnet.net:10210","Dance") //other possible url: http://streams.lazernet.be:2620
+		  new Station("RGR fm", "http://stream.intronic.nl/rgrfm","Dance"),
+		  new Station("RGR fm (alternate stream)", "http://shoutcast01.edpnet.net:10210","Dance")
 		), 
 	       "images/zender_rgr.gif");
 
@@ -192,22 +177,22 @@ AddNewStation( "ROL Radio",
 		), 
 	       "images/zender_rolradio.gif");
 
-AddNewStation( "Schlagerhits", 
+AddNewStation( "RadionoMix", 
 		new Array (
-		  new Station("Schlagerhits", "http://listen.radionomy.com/schlagerhits.m3u","Schlager / Oldies")
+		  new Station("RadionoMix", "http://listen.radionomy.com/schlagerhits.m3u","Downtempo / Easy Listening / Lounge / Chill-out ")
 		), 
-	       "images/zender_schlagerhits.gif");
+	       "images/zender_radionomix.gif");
 
 AddNewStation( "TOP Radio", 
 		new Array (
-		  new Station("TOP Radio Gent", "http://ns24907.ovh.net:8000","Dance"),
+		  new Station("TOP Radio Gent", "http://loadbalancing.topradio.be/topradio.mp3","Dance"),
 		  new Station("TOP Radio Aalter", "http://shoutcast01.edpnet.net:10090","Dance")
 		), 
 	       "images/zender_topradio.gif");
 
 AddNewStation( "C-dance", 
 		new Array (
-		  new Station("C-dance", "http://streamserver.c-dance.com:8320","Dance")
+		  new Station("C-dance", "http://91.121.219.80:8050","Dance")
 		), 
 	       "images/zender_cdance.gif");
 
@@ -228,12 +213,6 @@ AddNewStation( "Rootsradio",
 		  new Station("Rootsradio", "http://army.wavestreamer.com:4947","Jazz / Folk / Blues")
 		), 
 	       "images/zender_rootsradio.gif");
-
-AddNewStation( "Stadsradio M", 
-		new Array (
-		  new Station("Stadsradio M", "http://listen.radionomy.com/stadsradio-m","Pop / Top 40")
-		), 
-	       "images/zender_stadsradiom.gif");
 
 AddNewStation( "Urgent Radio", 
 		new Array (
@@ -261,7 +240,7 @@ AddNewStation( "2bfm",
 
 AddNewStation( "Laser Radio", 
 		new Array (
-		  new Station("Laser Radio", "http://server-09.stream-server.nl:8040","Dance") //other url: http://server-06.stream-server.nl:8040
+		  new Station("Laser Radio", "http://server-06.stream-server.nl:8040/listen.pls","Dance")
 		), 
 	       "images/zender_laserradio.gif");
 
@@ -285,30 +264,11 @@ AddNewStation( "FG DJ Radio",
 		), 
 	       "images/zender_fgdjradio.gif");
 
-AddNewStation( "Radio Go4it", 
-		new Array (
-		  new Station("Radio Go4it", "http://listen.radionomy.com/radiogo4it.m3u","Pop / Top 40")
-		), 
-	       "images/zender_radiogo4it.gif");
-
-AddNewStation( "Planet Rock", 
-		new Array (
-		  new Station("Planet Rock", "http://stream13.level27.be:8018","Rock")
-		), 
-	       "images/zender_planetrock.gif");
-
 AddNewStation( "Nashville fm", 
 		new Array (
-		  new Station("Nashville fm", "http://server-14.stream-server.nl:8300","Country")
+		  new Station("Nashville fm", "http://server-10.stream-server.nl:8300","Country")
 		), 
 	       "images/zender_nashvillefm.gif");
-
-//Stream is offline
-/*AddNewStation( "City Gold", 
-		new Array (
-		  new Station("City Gold", "http://stream.citygold.be:8004","Oldies")
-		), 
-	       "images/zender_citygold.gif");*/
 
 AddNewStation( "Starlight Radio", 
 		new Array (
@@ -324,7 +284,7 @@ AddNewStation( "Golden Flash",
 
 AddNewStation( "Zen fm", 
 		new Array (
-		  new Station("Zen fm", "http://ns25042.ovh.net:8010","Chillout / Grooves")
+		  new Station("Zen fm", "http://lb.zenfm.be/zenfm.mp3","Chillout / Grooves")
 		), 
 	       "images/zender_zenfm.gif");
 
@@ -353,7 +313,6 @@ AddNewStation( "VivaCité",
 		  new Station("VivaCité Namur", "http://vivacitenamur-brabantwallo.ice.infomaniak.ch:80/vivacitenamur-brabantwallo.mp3","Music / Information / Regional service"),    
 		  new Station("VivaCité Liège", "http://vivaciteliege.ice.infomaniak.ch:80/vivaciteliege.mp3","Music / Information / Regional service"),
 		  new Station("VivaCité Charleroi", "http://vivacitecharleroi.ice.infomaniak.ch:80/vivacitecharleroi.mp3","Music / Information / Regional service")
-		  //new Station("VivaCité Verviers", "http://www.static.rtbf.be/radio/vivacite/m3u/vivaver_56k.m3u","Music / Information / Regional service")
 		), 
 	       "images/zender_vivacite.gif");
 
@@ -365,23 +324,16 @@ AddNewStation( "Musiq 3",
 
 AddNewStation( "Classic 21", 
 		new Array (
-		  new Station("Classic 21", "http://stream5.rtbf.be:8000/2128xrtbf","Classic Hits"),
-		  //new Station("Classic 21 Les Classiques", "http://178.33.130.194:8000/listen.pls","Classic rock")
-		  new Station("Classic 21 60's", "http://178.33.130.197:8000", "60s")
-		  //new Station("Classic 21 80's", "http://178.33.130.196:8000/listen.plss", "80s")
+		  new Station("Classic 21", "http://ice3.infomaniak.ch:80/classic21-128.mp3","Classic Hits"),
+		  new Station("Classic 21 Les Classiques", "http://ice19.infomaniak.ch:80/wr-lesclassiquesdeclassic-128.mp3","Classic rock"),
+		  new Station("Classic 21 60's", "http://ice4.infomaniak.ch:80/wr-classic21-60-128.mp3", "60s"),
+		  new Station("Classic 21 80's", "http://ice4.infomaniak.ch:80/wr-classic21-80-128.mp3", "80s")
 		), 
 	       "images/zender_classic21.gif");
 
-//Does not exist anymore
-/*AddNewStation( "Voodoo fm", 
-		new Array (
-		  new Station("Voodoo fm", "http://193.227.114.74:8000","Voodoo fm")
-		), 
-	       "images/zender_voodoo.gif");*/
-
 AddNewStation( "Memory Radio", 
 		new Array (
-		  new Station("Memory Radio", "http://listen.radionomy.com/memory-radio","Oldies")
+		  new Station("Memory Radio", "http://www.memoryradio.de:4000","Oldies")
 		), 
 	       "images/zender_memory.gif");
 
@@ -391,12 +343,6 @@ AddNewStation( "Radio Minerva",
 		), 
 	       "images/zender_radiominerva.gif");
 
-AddNewStation( "BRO info- & oldiesradio", 
-		new Array (
-		  new Station("BRO info- & oldiesradio", "http://streams.movemedia.eu:8410","Oldies")
-		), 
-	       "images/zender_bro.gif");
-
 AddNewStation( "Antwerpen fm", 
 		new Array (
 		  new Station("Antwerpen fm", "http://streams.lazernet.be:2710","Pop")
@@ -405,13 +351,13 @@ AddNewStation( "Antwerpen fm",
 
 AddNewStation( "Zoe fm", 
 		new Array (
-		  new Station("Zoe fm", "http://91.121.117.158:8500","80s / 90s / Todays Hits")
+		  new Station("Zoe fm", "http://streams.movemedia.eu:8500","80s / 90s / Todays Hits")
 		), 
 	       "images/zender_zoefm.gif");
 
 AddNewStation( "Radio Stad", 
 		new Array (
-		  new Station("Radio Stad", "http://stream.belgiantracks.be:8002","RnB")
+		  new Station("Radio Stad", "http://193.227.114.74:8002","RnB")
 		), 
 	       "images/zender_radiostad.gif");
 
@@ -423,7 +369,7 @@ AddNewStation( "Radio Centraal",
 
 AddNewStation( "Geel fm", 
 		new Array (
-		  new Station("Geel fm", "http://geelfm.dyndns.org:8000/geelfm","Pop / Top 40")
+		  new Station("Geel fm", "http://geelfm.dlinkddns.com:8000/geelfm","Pop / Top 40")
 		), 
 	       "images/zender_geelfm.gif");
 
